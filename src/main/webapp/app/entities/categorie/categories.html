@@ -1,0 +1,6 @@
+<div class="row" >
+    <a class="categorie" ng-repeat="categorie in vm.categories track by categorie.id" ui-sref="categorie-detail({id:categorie.id})">
+        <img src="/content/images/{{categorie.imagineCategorie}}" class="imagine-categorie">
+        <span class="text-categorie">{{categorie.numeCategorie}}</span>
+    </a>
+</div>

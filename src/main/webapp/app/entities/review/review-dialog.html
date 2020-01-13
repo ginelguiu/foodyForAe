@@ -1,0 +1,87 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myReviewLabel">Scrie un review</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.review.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.review.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_titlu">Titlu</label>
+            <input type="text" class="form-control" name="titlu" id="field_titlu"
+                    ng-model="vm.review.titlu"
+                    required/>
+            <div ng-show="editForm.titlu.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.titlu.$error.required">
+                    Câmp obligatoriu
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_imagine">Imagine</label>
+            <input type="text" class="form-control" name="imagine" id="field_imagine"
+                    ng-model="vm.review.imagine"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_coordonateLocatie">Locație</label>
+            <input type="text" class="form-control" name="coordonateLocatie" id="field_coordonateLocatie"
+                    ng-model="vm.review.coordonateLocatie"
+                    required/>
+            <div ng-show="editForm.coordonateLocatie.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.coordonateLocatie.$error.required">
+                    Câmp obligatoriu
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="star1"></label>
+            <fieldset class="rating">
+                <input type="radio" ng-model="vm.review.numarStele" id="star5" name="rating" value="5" /><label class = "full" for="star5" ></label>
+                <input type="radio" ng-model="vm.review.numarStele" id="star4" name="rating" value="4" /><label class = "full" for="star4" ></label>
+                <input type="radio" ng-model="vm.review.numarStele" id="star3" name="rating" value="3" /><label class = "full" for="star3" ></label>
+                <input type="radio" ng-model="vm.review.numarStele" id="star2" name="rating" value="2" /><label class = "full" for="star2" ></label>
+                <input type="radio" ng-model="vm.review.numarStele" id="star1" name="rating" value="1" /><label class = "full" for="star1" ></label>
+            </fieldset>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_continutReview">Conținut Review</label>
+            <textarea class="form-control" style=" height:200px; word-wrap: break-word;" name="continutReview" id="field_continutReview"
+                    ng-model="vm.review.continutReview"
+                    required></textarea>
+            <div ng-show="editForm.continutReview.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.continutReview.$error.required">
+                    Câmp obligatoriu
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="field_categorie">Categorie</label>
+            <select class="form-control" id="field_categorie" name="categorie" ng-model="vm.review.categorieId" ng-options="categorie.id as categorie.numeCategorie for categorie in vm.categories"            >
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="button" class="btn btn-default" >
+            <span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<a ui-sref="regulament" target="_blank" class="nav-link"><span style="color:black">Regulament</span></a>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

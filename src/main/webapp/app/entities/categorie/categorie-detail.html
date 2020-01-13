@@ -1,0 +1,24 @@
+
+<div>
+    <h2 class="titluCategorie">{{vm.categorie.numeCategorie}}</h2>
+        <label for="sortare">Sortează:</label>
+        <select  id="sortare" name="sortare" data-ng-model="vm.optiuneSortare">
+            <option value="numarStele">Rating</option>
+            <option value="dataReview">Dată</option>
+            <option value="numarLikeuri">Like-uri</option>
+        </select>
+    <hr>
+    <div ng-cloak xmlns:review-detail>
+        <div class="row">
+            <div class="homePanel" ng-repeat="review in vm.reviews | orderBy : vm.optiuneSortare:true  track by review.id " ng-show="review.moderat">
+                <a ui-sref="review-detail({id:review.id})" class="nav-link">
+                    {{review.titlu}}
+                    <div class="scoreRibbon">
+                        <img class="leftImage"  src="content/images/like.png"> <span class="leftScore">{{review.numarLikeuri}}</span>
+                        <img class="rightImage"  src="content/images/dislike.png"> <span class="rightScore">{{review.numarDislikeuri}}</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

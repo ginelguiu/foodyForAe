@@ -1,0 +1,38 @@
+entity Review {
+	titlu String required,
+    imagine String,
+ 	coordonateLocatie String required,
+    numarStele Integer required,
+    continutReview String required,
+    dataReview LocalDate,
+    numarLikeuri Integer,
+    numarDislikeuri Integer,
+    moderat Boolean
+}
+
+entity Categorie {
+	numeCategorie String required,
+    imagineCategorie String
+}
+
+
+entity Comentariu {
+	continutComentariu String required,
+	dataComentariu LocalDate
+}
+
+
+relationship ManyToOne {
+	Review{user} to User,
+    Comentariu{review} to Review
+    Comentariu{user} to User
+    Review{categorie} to Categorie
+}
+
+
+paginate Review, Comentariu, Categorie with pagination
+
+dto * with mapstruct
+
+
+service Review, Comentariu, Categorie with serviceImpl

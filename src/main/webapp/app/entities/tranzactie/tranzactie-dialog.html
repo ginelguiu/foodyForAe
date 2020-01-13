@@ -1,0 +1,56 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myTranzactieLabel">Create or edit a Tranzactie</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.tranzactie.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.tranzactie.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_destinatar">Destinatar</label>
+            <input type="text" class="form-control" name="destinatar" id="field_destinatar" required
+                    ng-model="vm.tranzactie.destinatar"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_adresa">Adresa</label>
+            <input type="text" class="form-control" name="adresa" id="field_adresa" required
+                    ng-model="vm.tranzactie.adresa"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_contact">Contact</label>
+            <input type="text" class="form-control" name="contact" id="field_contact" required
+                    ng-model="vm.tranzactie.contact"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_valoare">Valoare</label>
+            <input type="number" class="form-control" disabled="disabled" value="{{vm.pretTotal}}" name="valoare" id="field_valoare"
+                    ng-model="vm.tranzactie.valoare"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label">Continut</label>
+            <ul>
+               <li ng-repeat="produs in vm.listaProduse">{{produs}}</li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving || !vm.tranzactie.continut || editForm.$invalid" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

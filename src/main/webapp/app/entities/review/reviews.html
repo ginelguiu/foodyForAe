@@ -1,0 +1,44 @@
+<div>
+
+    <h2 class="titluCategorie">Toate Review-urile</h2>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="review.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span >
+                        Scrie un Review
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br />
+    <label for="sortare">Sortează:</label>
+    <select  id="sortare" name="sortare" data-ng-model="vm.optiuneSortare">
+        <option value="numarStele">Rating</option>
+        <option value="dataReview">Dată</option>
+        <option value="numarLikeuri">Like-uri</option>
+    </select>
+    <hr>
+    <br/>
+    <div ng-cloak xmlns:review-detail>
+        <div class="row">
+            <div class="homePanel" ng-repeat="review in vm.reviews | orderBy : vm.optiuneSortare:true  track by review.id " ng-show="review.moderat">
+                <a ui-sref="review-detail({id:review.id})" class="nav-link">
+                    {{review.titlu}}
+                    <div class="scoreRibbon">
+                        <img class="leftImage"  src="content/images/like.png"> <span class="leftScore">{{review.numarLikeuri}}</span>
+                        <img class="rightImage"  src="content/images/dislike.png"> <span class="rightScore">{{review.numarDislikeuri}}</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="text-center">
+
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>

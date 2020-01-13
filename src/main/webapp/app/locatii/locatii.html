@@ -1,0 +1,50 @@
+<div ng-cloak>
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+
+        <h2 class="reviewTitle">Locații</h2>
+
+            <hr/>
+
+      <div ng-repeat="location in vm.locations track by $index" class="locationPanels">
+          <span style="font-size:25px;">{{location.nume}}</span>
+          <div class="panelContent" >
+              <span class="contentSpans"><i class="fab fa-stack-exchange"></i> {{location.nrReviewuri}} produse</span></br>
+              <span class="contentSpans"><i class="fas fa-thumbs-up"></i> {{location.nrLikeuri}} aprecieri</span></br>
+<!--              <span class="contentSpans">-->
+<!--                  <i class="fas fa-star" ></i>-->
+<!--                  <i class="fas fa-star" ></i>-->
+<!--                  <i class="fas fa-star" ></i>-->
+<!--                  <i class="fas fa-star" ></i>-->
+<!--                  <i class="fas fa-star" ></i> : {{location.rating[4]}}-->
+<!--              </span></br>-->
+<!--              <span class="contentSpans">-->
+<!--                  <i class="fas fa-star" ></i>-->
+<!--                  <i class="fas fa-star" ></i>-->
+<!--                  <i class="fas fa-star" ></i>-->
+<!--                  <i class="fas fa-star" ></i> : {{location.rating[3]}}-->
+<!--              </span></br>-->
+<!--              <span class="contentSpans">-->
+<!--                  <i class="fas fa-star" ></i>-->
+<!--                  <i class="fas fa-star" ></i>-->
+<!--                  <i class="fas fa-star" ></i> : {{location.rating[2]}}-->
+<!--              </span></br>-->
+<!--              <span class="contentSpans">-->
+<!--                  <i class="fas fa-star" ></i>-->
+<!--                  <i class="fas fa-star" ></i> : {{location.rating[1]}}-->
+<!--              </span>-->
+<!--                  </br>-->
+<!--              <span class="contentSpans">-->
+<!--                  <i class="fas fa-star" ></i> : {{location.rating[0]}}-->
+<!--              </span></br>-->
+              <span class="contentSpans">
+                  <a class="nav-link" target="_blank" href="http://www.google.com/search?q={{location.nume}}"><i class="fab fa-google"></i></a>
+              </span>
+          </div>
+      </div>
+
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+</div>

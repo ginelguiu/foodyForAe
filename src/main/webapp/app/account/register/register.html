@@ -1,0 +1,120 @@
+<div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h1 style="text-align:center; font-family: 'Open Sans', sans-serif; font-weight: bold">Înregistrare</h1>
+
+            <div class="alert alert-success" ng-show="vm.success">
+                <strong>Înregistrare reușită!</strong> Verifică mail-ul pentru confirmare!.
+            </div>
+
+            <div class="alert alert-danger" ng-show="vm.error">
+                <strong>Înregistrare nereușită!</strong> Încearcă mai târziu!.
+            </div>
+
+            <div class="alert alert-danger" ng-show="vm.errorUserExists">
+                <strong>Username deja folosit!</strong> Alege altul.
+            </div>
+
+            <div class="alert alert-danger" ng-show="vm.errorEmailExists">
+                <strong>Email-ul este deja folosit!</strong> Alege altul.
+            </div>
+
+            <div class="alert alert-danger" ng-show="vm.doNotMatch">
+                Parolele nu corepund!
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+            <form ng-show="!vm.success" name="form" role="form" novalidate ng-submit="vm.register()" show-validation>
+
+                <div class="form-group">
+                    <label class="control-label" for="login">Username</label>
+                    <input type="text" class="form-control" id="login" name="login" placeholder="Username-ul dorit"
+                           ng-model="vm.registerAccount.login" ng-minlength=1 ng-maxlength=50 ng-pattern="/^[_'.@A-Za-z0-9-]*$/" required>
+                    <div ng-show="form.login.$dirty && form.login.$invalid">
+                        <p class="help-block"
+                               ng-show="form.login.$error.required">
+                            Câmp obligatoriu.
+                        </p>
+                        <p class="help-block"
+                               ng-show="form.login.$error.minlength">
+                            Username-ul trebuie să conțină cel puțin un caracter.
+                        </p>
+                        <p class="help-block"
+                               ng-show="form.login.$error.maxlength">
+                            Username-ul nu poate conține mai mult de 50 de caractere.
+                        </p>
+                        <p class="help-block"
+                               ng-show="form.login.$error.pattern">
+                            Username-ul poate conține doar litere și cifre.
+                    </p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Adresa de email"
+                           ng-model="vm.registerAccount.email" ng-minlength=5 ng-maxlength=100 required>
+                    <div ng-show="form.email.$dirty && form.email.$invalid">
+                        <p class="help-block"
+                               ng-show="form.email.$error.required">
+                            Câmp obligatoriu.
+                        </p>
+                        <p class="help-block"
+                               ng-show="form.email.$error.email">
+                            Adresă de email invalidă.
+                        </p>
+                        <p class="help-block"
+                               ng-show="form.email.$error.minlength">
+                            Adresa de email trebuie să conțină cel puțin 5 caractere.
+                        </p>
+                        <p class="help-block"
+                               ng-show="form.email.$error.maxlength">
+                            Adresa de email nu poate conține mai mult de 50 de caractere.
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="password">Parolă</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Parolă"
+                           ng-model="vm.registerAccount.password" ng-minlength=4 ng-maxlength=50 required>
+                    <div ng-show="form.password.$dirty && form.password.$invalid">
+                        <p class="help-block"
+                               ng-show="form.password.$error.required">
+                            Câmp obligatoriu.
+                        </p>
+                        <p class="help-block"
+                               ng-show="form.password.$error.minlength">
+                            Parola trebuie să conțină cel puțin 4 caractere.
+                        </p>
+                        <p class="help-block"
+                               ng-show="form.password.$error.maxlength">
+                            Parola nu poate conține mai mult de 50 de caractere.
+                        </p>
+                    </div>
+                    <password-strength-bar password-to-check="vm.registerAccount.password"></password-strength-bar>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="confirmPassword">Confirmare parolă</label>
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirmare parolă"
+                           ng-model="vm.confirmPassword" ng-minlength=4 ng-maxlength=50 required>
+                    <div ng-show="form.confirmPassword.$dirty && form.confirmPassword.$invalid">
+                        <p class="help-block"
+                               ng-show="form.confirmPassword.$error.required">
+                            Câmp obligatoriu.
+                        </p>
+                        <p class="help-block"
+                               ng-show="form.confirmPassword.$error.minlength">
+                            Parola trebuie să conțină cel puțin 4 caractere.
+                        </p>
+                        <p class="help-block"
+                               ng-show="form.confirmPassword.$error.maxlength">
+                            Parola nu poate conține mai mult de 50 de caractere.
+                        </p>
+                    </div>
+                </div>
+
+                <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">Înregistrează-te</button>
+            </form>
+            <p></p>
+        </div>
+    </div>
+</div>

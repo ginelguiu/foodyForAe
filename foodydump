@@ -1,0 +1,224 @@
+SET DB_CLOSE_DELAY -1;        
+;             
+CREATE USER IF NOT EXISTS FOODY SALT '3ae3518102932a74' HASH '54181d6c8abb17c435e1737c4b88f338e2993b72b2c4198fe27dc310251b47b9' ADMIN;        
+CREATE SEQUENCE PUBLIC.SYSTEM_SEQUENCE_CA9E146D_B208_4BDA_810E_9F4124984DE4 START WITH 197 BELONGS_TO_TABLE;  
+CREATE SEQUENCE PUBLIC.SYSTEM_SEQUENCE_03E545F5_496B_4134_A445_6474429B5DFF START WITH 65 BELONGS_TO_TABLE;   
+CREATE SEQUENCE PUBLIC.SYSTEM_SEQUENCE_6CBB98E6_5F37_46A8_BEBB_4ACCFA833E5F START WITH 193 BELONGS_TO_TABLE;  
+CREATE SEQUENCE PUBLIC.SYSTEM_SEQUENCE_BFF015D9_E4F3_48EE_9F53_FA80505115A2 START WITH 514 BELONGS_TO_TABLE;  
+CREATE SEQUENCE PUBLIC.SYSTEM_SEQUENCE_C5069B51_5973_43EB_92B0_547128E6C4A2 START WITH 257 BELONGS_TO_TABLE;  
+CREATE CACHED TABLE PUBLIC.DATABASECHANGELOGLOCK(
+    ID INT NOT NULL,
+    LOCKED BOOLEAN NOT NULL,
+    LOCKGRANTED TIMESTAMP,
+    LOCKEDBY VARCHAR(255)
+);              
+ALTER TABLE PUBLIC.DATABASECHANGELOGLOCK ADD CONSTRAINT PUBLIC.PK_DATABASECHANGELOGLOCK PRIMARY KEY(ID);      
+-- 1 +/- SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOGLOCK;   
+INSERT INTO PUBLIC.DATABASECHANGELOGLOCK(ID, LOCKED, LOCKGRANTED, LOCKEDBY) VALUES
+(1, FALSE, NULL, NULL);   
+CREATE CACHED TABLE PUBLIC.DATABASECHANGELOG(
+    ID VARCHAR(255) NOT NULL,
+    AUTHOR VARCHAR(255) NOT NULL,
+    FILENAME VARCHAR(255) NOT NULL,
+    DATEEXECUTED TIMESTAMP NOT NULL,
+    ORDEREXECUTED INT NOT NULL,
+    EXECTYPE VARCHAR(10) NOT NULL,
+    MD5SUM VARCHAR(35),
+    DESCRIPTION VARCHAR(255),
+    COMMENTS VARCHAR(255),
+    TAG VARCHAR(255),
+    LIQUIBASE VARCHAR(20),
+    CONTEXTS VARCHAR(255),
+    LABELS VARCHAR(255),
+    DEPLOYMENT_ID VARCHAR(10)
+);               
+-- 6 +/- SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOG;       
+INSERT INTO PUBLIC.DATABASECHANGELOG(ID, AUTHOR, FILENAME, DATEEXECUTED, ORDEREXECUTED, EXECTYPE, MD5SUM, DESCRIPTION, COMMENTS, TAG, LIQUIBASE, CONTEXTS, LABELS, DEPLOYMENT_ID) VALUES
+('00000000000001', 'jhipster', 'config/liquibase/changelog/00000000000000_initial_schema.xml', TIMESTAMP '2018-05-29 21:27:33.952', 1, 'EXECUTED', '7:b10e7bd1b2793b69531cd807677d7f94', 'createTable tableName=jhi_user; createIndex indexName=idx_user_login, tableName=jhi_user; createIndex indexName=idx_user_email, tableName=jhi_user; createTable tableName=jhi_authority; createTable tableName=jhi_user_authority; addPrimaryKey tableN...', '', NULL, '3.5.3', NULL, NULL, '7618453678'),
+('20180529181736-1', 'jhipster', 'config/liquibase/changelog/20180529181736_added_entity_Review.xml', TIMESTAMP '2018-05-29 21:27:33.962', 2, 'EXECUTED', '7:fbdad13a79ed3ddd7a790d5ccd9ee3a6', 'createTable tableName=review', '', NULL, '3.5.3', NULL, NULL, '7618453678'),
+('20180529181737-1', 'jhipster', 'config/liquibase/changelog/20180529181737_added_entity_Categorie.xml', TIMESTAMP '2018-05-29 21:27:33.967', 3, 'EXECUTED', '7:88ac37767723af811466021eb1e713e9', 'createTable tableName=categorie', '', NULL, '3.5.3', NULL, NULL, '7618453678'),
+('20180529181738-1', 'jhipster', 'config/liquibase/changelog/20180529181738_added_entity_Comentariu.xml', TIMESTAMP '2018-05-29 21:27:33.971', 4, 'EXECUTED', '7:a1660c09b76c30e41094dc7308a3d16d', 'createTable tableName=comentariu', '', NULL, '3.5.3', NULL, NULL, '7618453678'),
+('20180529181736-2', 'jhipster', 'config/liquibase/changelog/20180529181736_added_entity_constraints_Review.xml', TIMESTAMP '2018-05-29 21:27:33.981', 5, 'EXECUTED', '7:5b2093f1160bd8358bc45d45e7423241', 'addForeignKeyConstraint baseTableName=review, constraintName=fk_review_user_id, referencedTableName=jhi_user; addForeignKeyConstraint baseTableName=review, constraintName=fk_review_categorie_id, referencedTableName=categorie', '', NULL, '3.5.3', NULL, NULL, '7618453678'),
+('20180529181738-2', 'jhipster', 'config/liquibase/changelog/20180529181738_added_entity_constraints_Comentariu.xml', TIMESTAMP '2018-05-29 21:27:33.993', 6, 'EXECUTED', '7:bd0f017837d78978acb2a7cb396109a5', 'addForeignKeyConstraint baseTableName=comentariu, constraintName=fk_comentariu_review_id, referencedTableName=review; addForeignKeyConstraint baseTableName=comentariu, constraintName=fk_comentariu_user_id, referencedTableName=jhi_user', '', NULL, '3.5.3', NULL, NULL, '7618453678');         
+CREATE CACHED TABLE PUBLIC.JHI_USER(
+    ID BIGINT DEFAULT (NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_CA9E146D_B208_4BDA_810E_9F4124984DE4) NOT NULL NULL_TO_DEFAULT SEQUENCE PUBLIC.SYSTEM_SEQUENCE_CA9E146D_B208_4BDA_810E_9F4124984DE4,
+    LOGIN VARCHAR(50) NOT NULL,
+    PASSWORD_HASH VARCHAR(60),
+    FIRST_NAME VARCHAR(50),
+    LAST_NAME VARCHAR(50),
+    EMAIL VARCHAR(100),
+    IMAGE_URL VARCHAR(256),
+    ACTIVATED BOOLEAN NOT NULL,
+    LANG_KEY VARCHAR(6),
+    ACTIVATION_KEY VARCHAR(20),
+    RESET_KEY VARCHAR(20),
+    CREATED_BY VARCHAR(50) NOT NULL,
+    CREATED_DATE TIMESTAMP DEFAULT NULL NOT NULL,
+    RESET_DATE TIMESTAMP,
+    LAST_MODIFIED_BY VARCHAR(50),
+    LAST_MODIFIED_DATE TIMESTAMP
+);  
+ALTER TABLE PUBLIC.JHI_USER ADD CONSTRAINT PUBLIC.PK_JHI_USER PRIMARY KEY(ID);
+-- 6 +/- SELECT COUNT(*) FROM PUBLIC.JHI_USER;
+INSERT INTO PUBLIC.JHI_USER(ID, LOGIN, PASSWORD_HASH, FIRST_NAME, LAST_NAME, EMAIL, IMAGE_URL, ACTIVATED, LANG_KEY, ACTIVATION_KEY, RESET_KEY, CREATED_BY, CREATED_DATE, RESET_DATE, LAST_MODIFIED_BY, LAST_MODIFIED_DATE) VALUES
+(1, 'system', '$2a$10$mE.qmcV0mFU5NcKh73TZx.z4ueI/.bDWbj0T1BYyqP481kGGarKLG', 'System', 'System', 'system@localhost', '', TRUE, 'en', NULL, NULL, 'system', TIMESTAMP '2018-05-29 21:27:33.913', NULL, 'system', NULL),
+(2, 'anonymoususer', '$2a$10$j8S5d7Sr7.8VTOYNviDPOeWX8KcYILUVJBsYV83Y5NtECayypx9lO', 'Anonymous', 'User', 'anonymous@localhost', '', TRUE, 'en', NULL, NULL, 'system', TIMESTAMP '2018-05-29 21:27:33.913', NULL, 'system', NULL),
+(3, 'admin', '$2a$10$gSAhZrxMllrbgj/kkK9UceBPpChGWJA7SYIb1Mqo.n5aNLq1/oRrC', 'Administrator', 'Administrator', 'admin@localhost', '', TRUE, 'en', NULL, NULL, 'system', TIMESTAMP '2018-05-29 21:27:33.913', NULL, 'system', NULL),
+(4, 'user', '$2a$10$VEjxo0jq2YG9Rbk2HmX9S.k1uZBGYUHdUcid3g/vfiEl7lwWgOH/K', 'User', 'User', 'user@localhost', '', TRUE, 'en', NULL, NULL, 'system', TIMESTAMP '2018-05-29 21:27:33.913', NULL, 'system', NULL),
+(101, 'ginelginel', '$2a$10$rjZq1qGjI9PKCiFoYfSHpeUNQQczzLJ.7Lqk.KRpTKeE41J/8ZO6u', 'Ginel', 'Guiu', 'legends_of_killer_randy_orton@yahoo.com', NULL, TRUE, 'en', NULL, NULL, 'anonymousUser', TIMESTAMP '2018-06-15 01:22:16.384', NULL, 'admin', TIMESTAMP '2018-06-20 20:32:26.738'),
+(133, 'ginelguiu', '$2a$10$rZQD5C4/ijkNGypY6bxf4uXAaLvsnPqYx.blCh4mS7pgHcY./ldUy', NULL, NULL, 'g.ginel96@gmail.com', NULL, TRUE, 'en', NULL, NULL, 'anonymousUser', TIMESTAMP '2018-06-20 20:32:45.836', NULL, 'anonymousUser', TIMESTAMP '2018-06-20 20:34:34.144');        
+CREATE UNIQUE INDEX PUBLIC.IDX_USER_LOGIN ON PUBLIC.JHI_USER(LOGIN);          
+CREATE UNIQUE INDEX PUBLIC.IDX_USER_EMAIL ON PUBLIC.JHI_USER(EMAIL);          
+CREATE CACHED TABLE PUBLIC.JHI_AUTHORITY(
+    NAME VARCHAR(50) NOT NULL
+);  
+ALTER TABLE PUBLIC.JHI_AUTHORITY ADD CONSTRAINT PUBLIC.PK_JHI_AUTHORITY PRIMARY KEY(NAME);    
+-- 2 +/- SELECT COUNT(*) FROM PUBLIC.JHI_AUTHORITY;           
+INSERT INTO PUBLIC.JHI_AUTHORITY(NAME) VALUES
+('ROLE_ADMIN'),
+('ROLE_USER');
+CREATE CACHED TABLE PUBLIC.JHI_USER_AUTHORITY(
+    USER_ID BIGINT NOT NULL,
+    AUTHORITY_NAME VARCHAR(50) NOT NULL
+);     
+ALTER TABLE PUBLIC.JHI_USER_AUTHORITY ADD CONSTRAINT PUBLIC.CONSTRAINT_E PRIMARY KEY(USER_ID, AUTHORITY_NAME);
+-- 7 +/- SELECT COUNT(*) FROM PUBLIC.JHI_USER_AUTHORITY;      
+INSERT INTO PUBLIC.JHI_USER_AUTHORITY(USER_ID, AUTHORITY_NAME) VALUES
+(1, 'ROLE_ADMIN'),
+(1, 'ROLE_USER'),
+(3, 'ROLE_ADMIN'),
+(3, 'ROLE_USER'),
+(4, 'ROLE_USER'),
+(101, 'ROLE_USER'),
+(133, 'ROLE_USER');              
+CREATE CACHED TABLE PUBLIC.JHI_PERSISTENT_AUDIT_EVENT(
+    EVENT_ID BIGINT DEFAULT (NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_BFF015D9_E4F3_48EE_9F53_FA80505115A2) NOT NULL NULL_TO_DEFAULT SEQUENCE PUBLIC.SYSTEM_SEQUENCE_BFF015D9_E4F3_48EE_9F53_FA80505115A2,
+    PRINCIPAL VARCHAR(50) NOT NULL,
+    EVENT_DATE TIMESTAMP,
+    EVENT_TYPE VARCHAR(255)
+);              
+ALTER TABLE PUBLIC.JHI_PERSISTENT_AUDIT_EVENT ADD CONSTRAINT PUBLIC.PK_JHI_PERSISTENT_AUDIT_EVENT PRIMARY KEY(EVENT_ID);      
+-- 35 +/- SELECT COUNT(*) FROM PUBLIC.JHI_PERSISTENT_AUDIT_EVENT;             
+INSERT INTO PUBLIC.JHI_PERSISTENT_AUDIT_EVENT(EVENT_ID, PRINCIPAL, EVENT_DATE, EVENT_TYPE) VALUES
+(1, 'admin', TIMESTAMP '2018-05-29 21:36:04.268', 'AUTHENTICATION_SUCCESS'),
+(2, 'admin', TIMESTAMP '2018-05-30 04:13:19.401', 'AUTHENTICATION_SUCCESS'),
+(33, 'admin', TIMESTAMP '2018-06-03 16:15:38.831', 'AUTHENTICATION_SUCCESS'),
+(34, 'user', TIMESTAMP '2018-06-03 18:04:11.177', 'AUTHENTICATION_SUCCESS'),
+(35, 'admin', TIMESTAMP '2018-06-03 19:17:40.866', 'AUTHENTICATION_SUCCESS'),
+(65, 'user', TIMESTAMP '2018-06-12 14:45:08.159', 'AUTHENTICATION_FAILURE'),
+(66, 'user', TIMESTAMP '2018-06-12 14:45:12.16', 'AUTHENTICATION_SUCCESS'),
+(67, 'admin', TIMESTAMP '2018-06-12 16:36:20.409', 'AUTHENTICATION_SUCCESS'),
+(97, 'admin', TIMESTAMP '2018-06-15 00:32:32.178', 'AUTHENTICATION_SUCCESS'),
+(129, 'admin', TIMESTAMP '2018-06-15 01:12:13.01', 'AUTHENTICATION_SUCCESS'),
+(161, 'admin', TIMESTAMP '2018-06-15 01:21:39.563', 'AUTHENTICATION_SUCCESS'),
+(162, 'admin', TIMESTAMP '2018-06-15 01:21:51.952', 'AUTHENTICATION_SUCCESS'),
+(193, 'admin', TIMESTAMP '2018-06-15 23:14:58.645', 'AUTHENTICATION_SUCCESS'),
+(225, 'ginelginel', TIMESTAMP '2018-06-17 13:35:19.917', 'AUTHENTICATION_SUCCESS'),
+(226, 'admin', TIMESTAMP '2018-06-17 13:41:49.05', 'AUTHENTICATION_SUCCESS'),
+(257, 'admin', TIMESTAMP '2018-06-19 13:22:57.148', 'AUTHENTICATION_SUCCESS'),
+(258, 'admin', TIMESTAMP '2018-06-19 13:51:15.247', 'AUTHENTICATION_SUCCESS'),
+(259, 'admin', TIMESTAMP '2018-06-19 13:51:16.608', 'AUTHENTICATION_SUCCESS'),
+(260, 'admin', TIMESTAMP '2018-06-19 13:51:17.61', 'AUTHENTICATION_SUCCESS'),
+(289, 'admin', TIMESTAMP '2018-06-19 13:51:46.952', 'AUTHENTICATION_SUCCESS'),
+(290, 'admin', TIMESTAMP '2018-06-19 14:32:12.668', 'AUTHENTICATION_SUCCESS'),
+(321, 'admin', TIMESTAMP '2018-06-20 14:18:08.502', 'AUTHENTICATION_SUCCESS'),
+(322, 'admin', TIMESTAMP '2018-06-20 15:02:21.993', 'AUTHENTICATION_SUCCESS'),
+(323, 'admin', TIMESTAMP '2018-06-20 20:31:55.653', 'AUTHENTICATION_SUCCESS'),
+(324, 'ginelguiu', TIMESTAMP '2018-06-20 20:42:26.778', 'AUTHENTICATION_SUCCESS'),
+(325, 'admin', TIMESTAMP '2018-06-20 21:30:11.769', 'AUTHENTICATION_SUCCESS'),
+(326, 'admin', TIMESTAMP '2018-06-20 21:31:12.393', 'AUTHENTICATION_SUCCESS'),
+(353, 'admin', TIMESTAMP '2018-07-12 00:43:28.729', 'AUTHENTICATION_SUCCESS'),
+(385, 'admin', TIMESTAMP '2018-07-17 20:01:46.563', 'AUTHENTICATION_SUCCESS'),
+(417, 'admin', TIMESTAMP '2018-07-19 20:08:55.453', 'AUTHENTICATION_SUCCESS'),
+(418, 'testache', TIMESTAMP '2018-07-19 23:04:29.824', 'AUTHENTICATION_FAILURE'),
+(419, 'testache', TIMESTAMP '2018-07-19 23:04:35.137', 'AUTHENTICATION_SUCCESS'),
+(449, 'admin', TIMESTAMP '2018-07-20 12:36:18.51', 'AUTHENTICATION_SUCCESS'),
+(481, 'admin', TIMESTAMP '2018-07-20 12:46:30.403', 'AUTHENTICATION_SUCCESS'),
+(513, 'admin', TIMESTAMP '2018-11-04 23:06:42.166', 'AUTHENTICATION_SUCCESS'); 
+CREATE INDEX PUBLIC.IDX_PERSISTENT_AUDIT_EVENT ON PUBLIC.JHI_PERSISTENT_AUDIT_EVENT(PRINCIPAL, EVENT_DATE);   
+CREATE CACHED TABLE PUBLIC.JHI_PERSISTENT_AUDIT_EVT_DATA(
+    EVENT_ID BIGINT NOT NULL,
+    NAME VARCHAR(150) NOT NULL,
+    VALUE VARCHAR(255)
+);         
+ALTER TABLE PUBLIC.JHI_PERSISTENT_AUDIT_EVT_DATA ADD CONSTRAINT PUBLIC.CONSTRAINT_F PRIMARY KEY(EVENT_ID, NAME);              
+-- 4 +/- SELECT COUNT(*) FROM PUBLIC.JHI_PERSISTENT_AUDIT_EVT_DATA;           
+INSERT INTO PUBLIC.JHI_PERSISTENT_AUDIT_EVT_DATA(EVENT_ID, NAME, VALUE) VALUES
+(65, 'type', 'org.springframework.security.authentication.BadCredentialsException'),
+(65, 'message', 'Bad credentials'),
+(418, 'type', 'org.springframework.security.authentication.BadCredentialsException'),
+(418, 'message', 'Bad credentials');        
+CREATE INDEX PUBLIC.IDX_PERSISTENT_AUDIT_EVT_DATA ON PUBLIC.JHI_PERSISTENT_AUDIT_EVT_DATA(EVENT_ID);          
+CREATE CACHED TABLE PUBLIC.REVIEW(
+    ID BIGINT DEFAULT (NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_C5069B51_5973_43EB_92B0_547128E6C4A2) NOT NULL NULL_TO_DEFAULT SEQUENCE PUBLIC.SYSTEM_SEQUENCE_C5069B51_5973_43EB_92B0_547128E6C4A2,
+    TITLU VARCHAR(255) NOT NULL,
+    IMAGINE VARCHAR(255),
+    COORDONATE_LOCATIE VARCHAR(255) NOT NULL,
+    NUMAR_STELE INT NOT NULL,
+    CONTINUT_REVIEW VARCHAR(8500) NOT NULL,
+    DATA_REVIEW DATE,
+    NUMAR_LIKEURI INT,
+    NUMAR_DISLIKEURI INT,
+    MODERAT BOOLEAN,
+    USER_ID BIGINT,
+    CATEGORIE_ID BIGINT
+);               
+ALTER TABLE PUBLIC.REVIEW ADD CONSTRAINT PUBLIC.PK_REVIEW PRIMARY KEY(ID);    
+-- 11 +/- SELECT COUNT(*) FROM PUBLIC.REVIEW; 
+INSERT INTO PUBLIC.REVIEW(ID, TITLU, IMAGINE, COORDONATE_LOCATIE, NUMAR_STELE, CONTINUT_REVIEW, DATA_REVIEW, NUMAR_LIKEURI, NUMAR_DISLIKEURI, MODERAT, USER_ID, CATEGORIE_ID) VALUES
+(1, 'A fost okay, dar nu stiu daca m-as mai intoarce', '', 'Chef''s Experience', 3, 'Competitiile de acest fel, pentru desemnarea celor mai bune feluri de mancare din anumite categorii specifice, se fac in aproape toate tarile, in paralel cu competitiile pentru desemnarea celor mai bune (in general) restaurante din orasul sau zona respective, grupate pe tipuri de bucatarii sau specific dominant, de regula. Se intampla adesea ca un restaurant sa fie desemnat drept cel mai bun din oras, pe anul respectiv, pentru o anumita bucatarie, insa cel mai bun fel dintr-o anumita mancare din acea bucatarie sa fie gasit(a) la alt restaurant. De aici utilitatea unui al doilea clasament, paralel.', DATE '2018-05-27', 6, 6, TRUE, 3, 3),
+(67, 'Pizza nebuna', 'https://pizzapph.ro/wp-content/uploads/2018/06/teaserbox_896304890-768x512.jpg', 'Pizza PPH', 3, STRINGDECODE('Competitiile de acest fel, pentru desemnarea celor mai bune feluri de mancare din anumite categorii specifice, se fac in aproape toate tarile, in paralel cu competitiile pentru desemnarea celor mai bune (in general) restaurante din orasul sau zona respective, grupate pe tipuri de bucatarii sau specific dominant, de regula.\nPentru competitia \"Topul Mancarurilor\", Restocracy a ales acest al doilea sistem, cu inscriere voluntara si cu evaluare deschisa, la vedere. Practic, prin acest sistem urmarim sa vedem care este nivelul maxim pe care un restaurant, respectiv cheful lor, pot sa-l atinga daca isi pun la contributie toata priceperea si resursele si fac un efort consistent, in ideea ca oricine ar putea beneficia de o astfel de experienta gastronomica, cel putin teoretic.'), DATE '2018-06-06', 15, 6, TRUE, 3, 35),
+(68, 'Peste de calitate', '', 'Clique', 5, STRINGDECODE('Competitiile de acest fel, pentru desemnarea celor mai bune feluri de mancare din anumite categorii specifice, se fac in aproape toate tarile, in paralel cu competitiile pentru desemnarea celor mai bune (in general) restaurante din orasul sau zona respective, grupate pe tipuri de bucatarii sau specific dominant, de regula.\nPentru competitia \"Topul Mancarurilor\", Restocracy a ales acest al doilea sistem, cu inscriere voluntara si cu evaluare deschisa, la vedere. Practic, prin acest sistem urmarim sa vedem care este nivelul maxim pe care un restaurant, respectiv cheful lor, pot sa-l atinga daca isi pun la contributie toata priceperea si resursele si fac un efort consistent, in ideea ca oricine ar putea beneficia de o astfel de experienta gastronomica, cel putin teoretic.'), DATE '2018-06-06', 1, 1, TRUE, 3, 2),
+(131, 'Cea mai buna pizza din tara!', NULL, 'Pizzamania', 5, STRINGDECODE('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet dui consequat, ornare elit sed, rutrum ipsum. Vivamus diam est, cursus in pharetra eu, egestas ac felis. Phasellus eget condimentum ante, ut vestibulum orci. Vestibulum facilisis mi eu consequat ultricies. Vivamus auctor lorem sed nisl molestie, nec gravida felis suscipit. Phasellus ut bibendum odio, vitae efficitur magna. Nam sagittis ultricies molestie. Suspendisse potenti. Pellentesque pellentesque felis est, eget sollicitudin urna venenatis vitae. Nulla vehicula purus nisl, ac blandit magna volutpat ut. Mauris ultrices diam a aliquam laoreet. Vivamus et leo suscipit, sagittis justo non, tincidunt tellus. Nullam commodo tempor dignissim. Mauris rhoncus faucibus enim, quis vulputate erat consequat vitae.\n\nInteger id eros interdum, viverra metus et, ullamcorper justo. Donec pellentesque, enim nec suscipit pulvinar, turpis arcu venenatis dui, nec vehicula quam purus ac massa. Etiam vel finibus ligula. Donec semper commodo porta. Nullam in feugiat enim, ac fermentum urna. Maecenas hendrerit augue sed turpis venenatis, ut fringilla ante commodo. Phasellus eget tempus eros. Donec convallis, ex id ultrices feugiat, neque turpis elementum tortor, bibendum fermentum justo arcu et leo. Nullam tempus mollis tellus ut malesuada. Morbi luctus sem at sem semper, eu lacinia mauris commodo. Morbi quis enim nec est finibus aliquam.'), DATE '2018-06-17', 1, 0, TRUE, 101, 35);               
+INSERT INTO PUBLIC.REVIEW(ID, TITLU, IMAGINE, COORDONATE_LOCATIE, NUMAR_STELE, CONTINUT_REVIEW, DATA_REVIEW, NUMAR_LIKEURI, NUMAR_DISLIKEURI, MODERAT, USER_ID, CATEGORIE_ID) VALUES
+(132, 'Chimichanga ca asta nu mai mananci in viata ta', NULL, 'El Torito', 5, STRINGDECODE('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet dui consequat, ornare elit sed, rutrum ipsum. Vivamus diam est, cursus in pharetra eu, egestas ac felis. Phasellus eget condimentum ante, ut vestibulum orci. Vestibulum facilisis mi eu consequat ultricies. Vivamus auctor lorem sed nisl molestie, nec gravida felis suscipit. Phasellus ut bibendum odio, vitae efficitur magna. Nam sagittis ultricies molestie. Suspendisse potenti. Pellentesque pellentesque felis est, eget sollicitudin urna venenatis vitae. Nulla vehicula purus nisl, ac blandit magna volutpat ut. Mauris ultrices diam a aliquam laoreet. Vivamus et leo suscipit, sagittis justo non, tincidunt tellus. Nullam commodo tempor dignissim. Mauris rhoncus faucibus enim, quis vulputate erat consequat vitae.\n\nInteger id eros interdum, viverra metus et, ullamcorper justo. Donec pellentesque, enim nec suscipit pulvinar, turpis arcu venenatis dui, nec vehicula quam purus ac massa. Etiam vel finibus ligula. Donec semper commodo porta. Nullam in feugiat enim, ac fermentum urna. Maecenas hendrerit augue sed turpis venenatis, ut fringilla ante commodo. Phasellus eget tempus eros. Donec convallis, ex id ultrices feugiat, neque turpis elementum tortor, bibendum fermentum justo arcu et leo. Nullam tempus mollis tellus ut malesuada. Morbi luctus sem at sem semper, eu lacinia mauris commodo. Morbi quis enim nec est finibus aliquam.\n\nCurabitur tortor tortor, aliquam eu mi vel, bibendum egestas nisl. Etiam et orci congue, ultrices est non, dignissim metus. Sed mattis lacus non ante varius, nec condimentum diam auctor. Etiam aliquet vel nisi id hendrerit. Maecenas convallis, leo sit amet egestas vestibulum, ante est egestas quam, vel rutrum erat augue vitae sem. Donec hendrerit eget magna sit amet volutpat. Etiam mattis arcu quis massa congue rutrum.'), DATE '2018-06-17', 3, 0, TRUE, 101, 1),
+(133, 'Niciodata in viata asta nu mai merg la ei!', 'https://www.seriouseats.com/images/2015/07/20150728-homemade-whopper-food-lab-00.jpg', 'Soho', 1, STRINGDECODE('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet dui consequat, ornare elit sed, rutrum ipsum. Vivamus diam est, cursus in pharetra eu, egestas ac felis. Phasellus eget condimentum ante, ut vestibulum orci. Vestibulum facilisis mi eu consequat ultricies. Vivamus auctor lorem sed nisl molestie, nec gravida felis suscipit. Phasellus ut bibendum odio, vitae efficitur magna. Nam sagittis ultricies molestie. Suspendisse potenti. Pellentesque pellentesque felis est, eget sollicitudin urna venenatis vitae. Nulla vehicula purus nisl, ac blandit magna volutpat ut. Mauris ultrices diam a aliquam laoreet. Vivamus et leo suscipit, sagittis justo non, tincidunt tellus. Nullam commodo tempor dignissim. Mauris rhoncus faucibus enim, quis vulputate erat consequat vitae.\n\nInteger id eros interdum, viverra metus et, ullamcorper justo. Donec pellentesque, enim nec suscipit pulvinar, turpis arcu venenatis dui, nec vehicula quam purus ac massa. Etiam vel finibus ligula. Donec semper commodo porta. Nullam in feugiat enim, ac fermentum urna. Maecenas hendrerit augue sed turpis venenatis, ut fringilla ante commodo. Phasellus eget tempus eros. Donec convallis, ex id ultrices feugiat, neque turpis elementum tortor, bibendum fermentum justo arcu et leo. Nullam tempus mollis tellus ut malesuada. Morbi luctus sem at sem semper, eu lacinia mauris commodo. Morbi quis enim nec est finibus aliquam.\n\nCurabitur tortor tortor, aliquam eu mi vel, bibendum egestas nisl. Etiam et orci congue, ultrices est non, dignissim metus. Sed mattis lacus non ante varius, nec condimentum diam auctor. Etiam aliquet vel nisi id hendrerit. Maecenas convallis, leo sit amet egestas vestibulum, ante est egestas quam, vel rutrum erat augue vitae sem. Donec hendrerit eget magna sit amet volutpat. Etiam mattis arcu quis massa congue rutrum.'), DATE '2018-06-17', 4, 0, TRUE, 101, 3); 
+INSERT INTO PUBLIC.REVIEW(ID, TITLU, IMAGINE, COORDONATE_LOCATIE, NUMAR_STELE, CONTINUT_REVIEW, DATA_REVIEW, NUMAR_LIKEURI, NUMAR_DISLIKEURI, MODERAT, USER_ID, CATEGORIE_ID) VALUES
+(161, STRINGDECODE('Pizza de calitate superioar\u0103'), 'https://pizzapph.ro/wp-content/uploads/2018/06/Mexicana-4.jpg', 'Pizza PPH', 5, STRINGDECODE('O pizza care mi-a f\u0103cut papilele gustative s\u0103 o ia razna. Felul \u00een care porumbul, carnea \u0219i aromele picante rimeaz\u0103 este unul deosebit. Voi mai da comanda de la ei.\nBONUS: Mi-a livrat pizza o fat\u0103 foarte frumoas\u0103 :)'), DATE '2018-06-20', 0, 0, FALSE, 3, 35),
+(193, 'Mai merg', NULL, 'El Torito', 5, 'Mi-a placut mult pizza lor mexicana. Recomand cu drag!', DATE '2018-07-13', 1, 0, TRUE, 3, 35),
+(225, 'II ADOR', NULL, 'El Torito', 5, 'orgasm culinar, va asigur', DATE '2018-07-17', 0, 0, TRUE, 3, 35),
+(226, STRINGDECODE('Cele mai bune cl\u0103tite din Bucure\u0219ti!'), 'https://d2fdt3nym3n14p.cloudfront.net/images/17867/big/15873373_322426974824565_8321851845730762518_n.jpg', 'Maison des Crepes', 5, 'Am comandat Silvia si am fost pe deplin multumit! Recomand pentru o intalnire romantica cu prietena, iesire cu grupul sau pentru o satisfacere solitara a gusturilor', DATE '2018-07-17', 1, 0, TRUE, 3, 36),
+(227, 'GROAZNIC!', 'http://scms.machteamsoft.ro/uploads/photos/652x450/652x450_088653-un-tanar-a-transformat-un-sobolan-in-animal-de-companie.jpg', STRINGDECODE('Buc\u0103t\u0103ra\u0219ul cel dibaci'), 1, STRINGDECODE('Am pus un \u0219obolan \u00een poz\u0103 pentru c\u0103 acesta este mediul care v\u0103 va \u00eent\u00e2mpina odat\u0103 ce ve\u021bi intra acolo! pe dinafar\u0103 arat\u0103 okay, dar c\u00e2nd intri????? miros de urzic\u0103, scaune rupte, servirea f\u0103cut\u0103 de un c\u00e2ine, iar dragul burger pe care mi l-am comandat a venit f\u0103r\u0103 carne \u00een el!\n\n\nNU MERGE\u021aI!'), DATE '2018-07-17', 0, 0, TRUE, 3, 3);          
+CREATE CACHED TABLE PUBLIC.CATEGORIE(
+    ID BIGINT DEFAULT (NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_03E545F5_496B_4134_A445_6474429B5DFF) NOT NULL NULL_TO_DEFAULT SEQUENCE PUBLIC.SYSTEM_SEQUENCE_03E545F5_496B_4134_A445_6474429B5DFF,
+    NUME_CATEGORIE VARCHAR(255) NOT NULL,
+    IMAGINE_CATEGORIE VARCHAR(255)
+);   
+ALTER TABLE PUBLIC.CATEGORIE ADD CONSTRAINT PUBLIC.PK_CATEGORIE PRIMARY KEY(ID);              
+-- 7 +/- SELECT COUNT(*) FROM PUBLIC.CATEGORIE;               
+INSERT INTO PUBLIC.CATEGORIE(ID, NUME_CATEGORIE, IMAGINE_CATEGORIE) VALUES
+(1, 'Chimichanga', 'chimichangaCat.jpg'),
+(2, STRINGDECODE('Pe\u0219te'), 'fishCat.jpg'),
+(3, 'Burgeri', 'burgerCat.jpg'),
+(33, 'Lasagna', 'lasagnaCat.jpg'),
+(34, STRINGDECODE('Omlet\u0103'), 'omletaCat.jpg'),
+(35, 'Pizza', 'pizzaCat.jpg'),
+(36, STRINGDECODE('Cl\u0103tite'), 'pancakesCat.jpg');     
+CREATE CACHED TABLE PUBLIC.COMENTARIU(
+    ID BIGINT DEFAULT (NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_6CBB98E6_5F37_46A8_BEBB_4ACCFA833E5F) NOT NULL NULL_TO_DEFAULT SEQUENCE PUBLIC.SYSTEM_SEQUENCE_6CBB98E6_5F37_46A8_BEBB_4ACCFA833E5F,
+    CONTINUT_COMENTARIU VARCHAR(255) NOT NULL,
+    DATA_COMENTARIU DATE,
+    REVIEW_ID BIGINT,
+    USER_ID BIGINT
+);           
+ALTER TABLE PUBLIC.COMENTARIU ADD CONSTRAINT PUBLIC.PK_COMENTARIU PRIMARY KEY(ID);            
+-- 9 +/- SELECT COUNT(*) FROM PUBLIC.COMENTARIU;              
+INSERT INTO PUBLIC.COMENTARIU(ID, CONTINUT_COMENTARIU, DATA_COMENTARIU, REVIEW_ID, USER_ID) VALUES
+(1, '1asssssw', DATE '2018-06-02', 1, 3),
+(33, 'asaaaaaaaaaaaa', DATE '2018-05-31', 1, 3),
+(97, 'Prima incercare?', DATE '2018-06-19', 67, 3),
+(98, 'Merge baaaaaaaaaaaaaaaaa', DATE '2018-06-19', 67, 3),
+(99, 'Ai dreptate', DATE '2018-06-19', 67, 3),
+(129, 'eeeeo', DATE '2018-06-20', 1, 133),
+(130, STRINGDECODE('\u0218i eu am fost la ei \u0219i nu am fost deloc mul\u021bumit de servire!'), DATE '2018-06-20', 133, 133),
+(161, 'ghici cineee', DATE '2018-07-02', 1, 3),
+(162, 'bravo, utilizatori!', DATE '2018-07-02', 133, 3);    
+ALTER TABLE PUBLIC.JHI_USER ADD CONSTRAINT PUBLIC.UX_USER_LOGIN UNIQUE(LOGIN);
+ALTER TABLE PUBLIC.JHI_USER ADD CONSTRAINT PUBLIC.UX_USER_EMAIL UNIQUE(EMAIL);
+ALTER TABLE PUBLIC.COMENTARIU ADD CONSTRAINT PUBLIC.FK_COMENTARIU_REVIEW_ID FOREIGN KEY(REVIEW_ID) REFERENCES PUBLIC.REVIEW(ID) NOCHECK;      
+ALTER TABLE PUBLIC.JHI_USER_AUTHORITY ADD CONSTRAINT PUBLIC.FK_USER_ID FOREIGN KEY(USER_ID) REFERENCES PUBLIC.JHI_USER(ID) NOCHECK;           
+ALTER TABLE PUBLIC.JHI_PERSISTENT_AUDIT_EVT_DATA ADD CONSTRAINT PUBLIC.FK_EVT_PERS_AUDIT_EVT_DATA FOREIGN KEY(EVENT_ID) REFERENCES PUBLIC.JHI_PERSISTENT_AUDIT_EVENT(EVENT_ID) NOCHECK;       
+ALTER TABLE PUBLIC.COMENTARIU ADD CONSTRAINT PUBLIC.FK_COMENTARIU_USER_ID FOREIGN KEY(USER_ID) REFERENCES PUBLIC.JHI_USER(ID) NOCHECK;        
+ALTER TABLE PUBLIC.REVIEW ADD CONSTRAINT PUBLIC.FK_REVIEW_USER_ID FOREIGN KEY(USER_ID) REFERENCES PUBLIC.JHI_USER(ID) NOCHECK;
+ALTER TABLE PUBLIC.REVIEW ADD CONSTRAINT PUBLIC.FK_REVIEW_CATEGORIE_ID FOREIGN KEY(CATEGORIE_ID) REFERENCES PUBLIC.CATEGORIE(ID) NOCHECK;     
+ALTER TABLE PUBLIC.JHI_USER_AUTHORITY ADD CONSTRAINT PUBLIC.FK_AUTHORITY_NAME FOREIGN KEY(AUTHORITY_NAME) REFERENCES PUBLIC.JHI_AUTHORITY(NAME) NOCHECK;      

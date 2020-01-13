@@ -1,0 +1,31 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "numeCategorie",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "imagineCategorie",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "pret",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "stoc",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20180529181737",
+    "dto": "mapstruct",
+    "service": "serviceImpl",
+    "entityTableName": "categorie",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

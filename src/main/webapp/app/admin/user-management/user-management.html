@@ -1,0 +1,131 @@
+<div>
+    <h2>Utilizatori</h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+      <div class="col-md-4">
+          <button class="btn btn-primary" ui-sref="user-management.new">
+              <span class="glyphicon glyphicon-flash"></span> <span>Utilizator nou</span>
+          </button>
+      </div>
+    </div>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+            <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                <th jh-sort-by="id"><span>ID</span><span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="login"><span>Login</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="email"><span>Email</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <th></th>
+                                <th><span>Roluri</span></th>                <th jh-sort-by="createdDate"><span>Creat la</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="lastModifiedBy"><span>Ultima dată modificat de</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="lastModifiedDate"><span>Ultima dată modificat la</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="user in vm.users track by user.id">
+                <td><a ui-sref="user-management-detail({login:user.login})">{{user.id}}</a></td>
+                <td>{{user.login}}</td>
+                <td>{{user.email}}</td>
+                <td>
+                    <button class="btn btn-danger btn-xs" ng-click="vm.setActive(user, true)" ng-show="!user.activated"
+                           >Deactivated</button>
+                    <button class="btn btn-success btn-xs" ng-click="vm.setActive(user, false)" ng-show="user.activated"
+                            ng-disabled="vm.currentAccount.login === user.login">Activated</button>
+                </td>
+
+                <td>
+                    <div ng-repeat="authority in user.authorities">
+                        <span class="label label-info">{{ authority }}</span>
+                    </div>
+                </td>
+                <td>{{user.createdDate | date:'dd/MM/yy HH:mm'}}</td>
+                <td>{{user.lastModifiedBy}}</td>
+                <td>{{user.lastModifiedDate | date:'dd/MM/yy HH:mm'}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                ui-sref="user-management-detail({login:user.login})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>
+                            <span class="hidden-xs hidden-sm"></span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="user-management.edit({login:user.login})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                            <span class="hidden-xs hidden-sm"></span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="user-management.delete({login:user.login})"
+                                class="btn btn-danger btn-sm" ng-disabled="vm.currentAccount.login === user.login">
+                            <span class="glyphicon glyphicon-remove-circle"></span>
+                            <span class="hidden-xs hidden-sm"></span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+    <h2>Review-uri</h2>
+    <span class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="titlu"><span>Titlu</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="coordonateLocatie"><span>Locație</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="moderat"><span>Stare</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="dataReview"><span>Dată Review</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="numarLikeuri"><span>Număr Likeuri</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="numarDislikeuri"><span>Număr Dislikeuri</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="categorieId"><span>Categorie</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="review in vm.reviews track by review.id" >
+                    <td>{{review.titlu}}</td>
+                    <td>{{review.coordonateLocatie}}</td>
+                    <td>
+                    <button class="btn btn-danger btn-xs" ng-click="vm.setReviewModerat(review, true)" ng-show="!review.moderat"
+                    >Nemoderat</button>
+                    <button class="btn btn-success btn-xs" ng-click="vm.setReviewModerat(review, false)" ng-show="review.moderat">Moderat</button>
+                    </td>
+                        <td>{{review.dataReview | date:'mediumDate'}}</td>
+                    <td>{{review.numarLikeuri}}</td>
+                    <td>{{review.numarDislikeuri}}</td>
+                    <td>
+                        <a ui-sref="categorie-detail({id:review.categorieId})">{{review.categorieId}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="review-detail({id:review.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="review.edit({id:review.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="review.delete({id:review.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </span>
+</div>
+

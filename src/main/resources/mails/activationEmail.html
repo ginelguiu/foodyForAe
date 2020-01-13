@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title th:text="#{email.activation.title}">Activare cont Foody</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="shortcut icon" th:href="@{|${baseUrl}/favicon.ico|}" />
+    </head>
+    <body>
+        <p th:text="#{email.activation.greeting(${user.login})}">
+            Draga
+        </p>
+        <p th:text="#{email.activation.text1}">
+            Contul tau a fost activat! Acceseaza link-ul urmator pentru a il accesa!
+        </p>
+        <p>
+            <a th:href="@{|${baseUrl}/#/activate?key=${user.activationKey}|}"
+               th:text="@{|${baseUrl}/#/activate?key=${user.activationKey}|}">Link Activare</a>
+        </p>
+        <p>
+            <span th:text="#{email.activation.text2}">Toate cele bune, </span>
+            <br/>
+            <em th:text="#{email.signature}">Foody.</em>
+        </p>
+    </body>
+</html>

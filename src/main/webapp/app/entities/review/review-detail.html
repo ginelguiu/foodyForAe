@@ -1,0 +1,71 @@
+
+<div>
+    <h2 class="reviewTitle">{{vm.review.titlu}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><i class="fas fa-user-circle fa-2x" style="color:#2980b9; " ></i></dt>
+        <dd>
+            <span ng-init="vm.getCategorie(vm.review.categorieId)" class="reviewUnitText">{{vm.categories[0].pret}} lei</span>
+            <span class="reviewRating"  >
+                <button
+                    ng-click="vm.addToCart(vm.review.id)"
+                    class="btn btn-info">
+                    <span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;<span> Adauga la Cos</span>
+                </button>            </span>
+            <span class="reviewLocation">
+                <img class="image" src="/content/images/reviewLocation.png"><span style="font-family:Roboto, sans-serif; font-weight: bold;">{{vm.review.coordonateLocatie}}</span>
+            </span>
+        </dd>
+        <dt><span></span></dt>
+        <dd>
+            <span ng-show="vm.review.imagine"><img src="{{vm.review.imagine}}" class="reviewImage"></span>
+            <span ng-show="!vm.review.imagine"><img src="/content/images/defaultReviewImage.png" class="reviewImage"></span>
+        </dd>
+        <dt></dt>
+        <dd>
+            <div class="reviewTextContinut">{{vm.review.continutReview}}</div>
+        </dd>
+        <dt></dt>
+        <dd>
+            <i class="fas fa-clock" style="float:right; padding:3px; margin-bottom:10px;"></i>
+            <span class="reviewDate">{{vm.review.dataReview | date:'mediumDate'}}</span>
+        </dd>
+        <dt></dt>
+        <dd>
+            <input type="image" class="leftImage"  src="content/images/like.png" ng-click="vm.cresteLike()" ng-disabled="buttonClicked">  <span class="leftScore">{{vm.review.numarLikeuri}}</span>
+            <input type="image" class="rightImage" style="float:left; margin-left:10px;" src="content/images/dislike.png" ng-click="vm.cresteDislike()" ng-disabled="buttonClicked"> <span class="rightScore" style="float:left; margin-left:-28px;">{{vm.review.numarDislikeuri}}</span>
+        </dd>
+
+    </dl>
+
+
+    <h2 class="reviewTitle">Comentarii</h2>
+    <dl class="dl-horizontal jh-entity-details" ng-repeat="comentariu in vm.comentarii track by comentariu.id">
+        <dt ng-init="vm.getUser(comentariu.userId)" class="userComentariu">{{vm.users[$index+1].login}}</dt>
+        <dd><span class="continutComentariu">{{comentariu.continutComentariu}}</span>
+            <span class="reviewDate">{{comentariu.dataComentariu}}</span>
+        </dd>
+    </dl>
+    <div ng-switch="vm.isAuthenticated()">
+        <dl class="dl-horizontal jh-entity-details" ng-switch-when="true">
+            <dt>
+                <button type="submit" ng-click="vm.saveComment()" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Postează</span>
+                </button>
+            </dt>
+            <dd>
+                <input type="text" class="form-control" name="continutComentariu" id="field_continutComentariu"
+                   ng-model="vm.comentariuNou.continutComentariu"
+                   required/>
+            </dd>
+        </dl>
+        <span style="text-align: center" ng-switch-when="false">Logați-vă pentru a putea posta comentarii</span>
+    </div>
+    <button type="submit"
+            ng-click="$back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+</div>

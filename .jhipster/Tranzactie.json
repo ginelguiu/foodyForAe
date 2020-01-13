@@ -1,0 +1,32 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "destinatar",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "adresa",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "contact",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "valoare",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "continut",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20200111160209",
+    "dto": "mapstruct",
+    "service": "serviceImpl",
+    "entityTableName": "tranzactie",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pager"
+}

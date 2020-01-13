@@ -1,0 +1,73 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "categorie",
+            "otherEntityName": "categorie",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "titlu",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "imagine",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "coordonateLocatie",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "numarStele",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "continutReview",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "dataReview",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "numarLikeuri",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "numarDislikeuri",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "moderat",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20180529181736",
+    "entityTableName": "review",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false
+}

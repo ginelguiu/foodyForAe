@@ -1,0 +1,68 @@
+<div>
+    <h2>Tranzacties</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="tranzactie.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span >
+                        Create new Tranzactie
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="destinatar"><span>Destinatar</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="adresa"><span>Adresa</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="contact"><span>Contact</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="valoare"><span>Valoare</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="continut"><span>Continut</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="tranzactie in vm.tranzacties track by tranzactie.id">
+                    <td><a ui-sref="tranzactie-detail({id:tranzactie.id})">{{tranzactie.id}}</a></td>
+                    <td>{{tranzactie.destinatar}}</td>
+                    <td>{{tranzactie.adresa}}</td>
+                    <td>{{tranzactie.contact}}</td>
+                    <td>{{tranzactie.valoare}}</td>
+                    <td>{{tranzactie.continut}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="tranzactie-detail({id:tranzactie.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="tranzactie.edit({id:tranzactie.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="tranzactie.delete({id:tranzactie.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+    </div>
+    <uib-pager total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pager>
+</div>
