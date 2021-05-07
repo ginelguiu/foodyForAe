@@ -68,6 +68,6 @@
     "test": "gulp test"
   },
   "dependencies": {
-    "underscore": "^1.9.1"
+    "underscore": "^1.12.1"
   }
 }
