@@ -110,6 +110,12 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
+ansi-colors@^1.0.1:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/ansi-colors/-/ansi-colors-1.1.0.tgz#6374b4dd5d4718ff3ce27a671a3b1cad077132a9"
+  dependencies:
+    ansi-wrap "^0.1.0"
+
 ansi-escapes@^1.1.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/ansi-escapes/-/ansi-escapes-1.4.0.tgz#d3a8a83b319aa67793662b13e761c7911422306e"
@@ -142,7 +148,7 @@ ansi-styles@^3.1.0, ansi-styles@^3.2.1:
   dependencies:
     color-convert "^1.9.0"
 
-ansi-wrap@0.1.0:
+ansi-wrap@0.1.0, ansi-wrap@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/ansi-wrap/-/ansi-wrap-0.1.0.tgz#a82250ddb0015e9a27ca82e82ea603bbfa45efaf"
 
@@ -2097,7 +2103,7 @@ event-emitter@~0.3.5:
 
 event-stream@*, event-stream@3.3.4, event-stream@^3.1.0, event-stream@^3.1.1, event-stream@^3.3.1:
   version "3.3.4"
-  resolved "http://registry.npmjs.org/event-stream/-/event-stream-3.3.4.tgz#4ab4c9a0f5a54db9338b4c34d86bfce8f4b35571"
+  resolved "https://registry.npmjs.org/event-stream/-/event-stream-3.3.4.tgz#4ab4c9a0f5a54db9338b4c34d86bfce8f4b35571"
   dependencies:
     duplexer "~0.1.1"
     from "~0"
@@ -2109,7 +2115,7 @@ event-stream@*, event-stream@3.3.4, event-stream@^3.1.0, event-stream@^3.1.1, ev
 
 event-stream@3.3.2:
   version "3.3.2"
-  resolved "http://registry.npmjs.org/event-stream/-/event-stream-3.3.2.tgz#3cc310feb1f28d2f62b2a085d736a9ef566378b8"
+  resolved "https://registry.npmjs.org/event-stream/-/event-stream-3.3.2.tgz#3cc310feb1f28d2f62b2a085d736a9ef566378b8"
   dependencies:
     duplexer "~0.1.1"
     from "~0"
@@ -3006,6 +3012,15 @@ gulp-autoprefixer@3.1.1:
     autoprefixer "^6.0.0"
     gulp-util "^3.0.0"
     postcss "^5.0.4"
+    through2 "^2.0.0"
+    vinyl-sourcemaps-apply "^0.2.0"
+
+gulp-babel@^7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/gulp-babel/-/gulp-babel-7.0.1.tgz#b9c8e29fa376b36c57989db820fc1c1715bb47cb"
+  dependencies:
+    plugin-error "^1.0.1"
+    replace-ext "0.0.1"
     through2 "^2.0.0"
     vinyl-sourcemaps-apply "^0.2.0"
 
@@ -5504,7 +5519,7 @@ once@~1.3.0:
 
 onetime@^1.0.0:
   version "1.1.0"
-  resolved "http://registry.npmjs.org/onetime/-/onetime-1.1.0.tgz#a1f7838f8314c516f05ecefcbc4ccfe04b4ed789"
+  resolved "https://registry.npmjs.org/onetime/-/onetime-1.1.0.tgz#a1f7838f8314c516f05ecefcbc4ccfe04b4ed789"
 
 onetime@^2.0.0:
   version "2.0.1"
@@ -5790,8 +5805,8 @@ path-key@^2.0.0, path-key@^2.0.1:
   resolved "https://registry.yarnpkg.com/path-key/-/path-key-2.0.1.tgz#411cadb574c5a140d3a4b1910d40d80cc9f40b40"
 
 path-parse@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.5.tgz#3c1adf871ea9cd6c9431b6ea2bd74a0ff055c4c1"
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.7.tgz#fbc114b60ca42b30d9daf5858e4bd68bbedb6735"
 
 path-root-regex@^0.1.0:
   version "0.1.2"
@@ -5868,6 +5883,15 @@ pinkie-promise@^2.0.0:
 pinkie@^2.0.0:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/pinkie/-/pinkie-2.0.4.tgz#72556b80cfa0d48a974e80e77248e80ed4f7f870"
+
+plugin-error@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/plugin-error/-/plugin-error-1.0.1.tgz#77016bd8919d0ac377fdcdd0322328953ca5781c"
+  dependencies:
+    ansi-colors "^1.0.1"
+    arr-diff "^4.0.0"
+    arr-union "^3.1.0"
+    extend-shallow "^3.0.2"
 
 plur@^2.0.0:
   version "2.1.2"
@@ -7624,6 +7648,10 @@ unc-path-regex@^0.1.2:
 underscore@1.7.x:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.7.0.tgz#6bbaf0877500d36be34ecaa584e0db9fef035209"
+
+underscore@^1.9.1:
+  version "1.13.1"
+  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.13.1.tgz#0c1c6bd2df54b6b69f2314066d65b6cde6fcf9d1"
 
 union-value@^0.2.3:
   version "0.2.4"
